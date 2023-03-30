@@ -28,6 +28,28 @@
   color: #61dafb;
 }
 
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+.gray{
+  color: gray;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.yellow{
+  color: yellow;
+}
+.mb-2{
+  margin-bottom: 2rem;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
