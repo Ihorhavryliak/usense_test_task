@@ -1,110 +1,61 @@
-import { useState } from "react"
-import "./App.css"
+import { useState } from "react";
+import "./App.css";
+import { Field } from "./Components/Field/Field";
+import { Sections } from "./Components/Sections/Sections";
+import { PasswordType } from "./Components/PasswordType/PasswordType";
+import { FieldLength } from "./Components/FieldLength/FieldLength";
 
 function App() {
-
-  const [passwordStrength, setPasswordStrength] = useState("")
-  const [color, setColor] = useState("")
-  const [lengthField, setLengthField] = useState("")
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [color, setColor] = useState("");
+  const [lengthField, setLengthField] = useState("");
 
   const onChangeField = (text: string) => {
-    setLengthField(text)
+    setLengthField(text);
     //check
-    const isLetters = /[A-Z]/gi.test(text)
-    const isDigits = /[0-9]/g.test(text)
-    const isSymbols = /[!@#$%^&*(),.?":{}|<>]/g.test(text)
+    const isLetters = /[A-Z]/gi.test(text);
+    const isDigits = /[0-9]/g.test(text);
+    const isSymbols = /[!@#$%^&*(),.?":{}|<>]/g.test(text);
 
     if (text.length === 0) {
-      setPasswordStrength("")
+      setPasswordStrength("");
     } else if (isSymbols && !isDigits && !isLetters) {
-      setPasswordStrength("easy")
+      setPasswordStrength("easy");
     } else if (!isSymbols && isDigits && !isLetters) {
-      setPasswordStrength("easy")
+      setPasswordStrength("easy");
     } else if (!isSymbols && !isDigits && isLetters) {
-      setPasswordStrength("easy")
+      setPasswordStrength("easy");
     } else if (isSymbols && !isDigits && isLetters) {
-      setPasswordStrength("medium")
+      setPasswordStrength("medium");
     } else if (!isSymbols && isDigits && isLetters) {
-      setPasswordStrength("medium")
+      setPasswordStrength("medium");
     } else if (isSymbols && isDigits && !isLetters) {
-      setPasswordStrength("medium")
+      setPasswordStrength("medium");
     } else {
-      setPasswordStrength("strong")
+      setPasswordStrength("strong");
     }
 
     if (text.length === 0) {
-      setColor("gray")
+      setColor("gray");
     } else if (text.length < 8) {
-      setColor("red")
+      setColor("red");
     } else {
-      setColor("")
+      setColor("");
     }
-  }
+  };
 
   return (
     <div className="center">
       <div>
         <div className="mb-2">
-          <input type="text" onChange={(e) => onChangeField(e.target.value)} />
+          <Field onChangeField={onChangeField} />
         </div>
-        <div className="mb-2">
-          <div
-            className={
-              color === "gray"
-                ? "gray"
-                : color === "red"
-                ? "red"
-                : passwordStrength === "easy"
-                ? "red"
-                : passwordStrength === "strong"
-                ? "green"
-                : passwordStrength === "medium"
-                ? "yellow"
-                : color
-            }
-          >
-            the password is easy
-          </div>
-          <div
-            className={
-              color === "gray"
-                ? "gray"
-                : color === "red"
-                ? "red"
-                : passwordStrength === "easy"
-                ? "gray"
-                : passwordStrength === "strong"
-                ? "green"
-                : passwordStrength === "medium"
-                ? "yellow"
-                : color
-            }
-          >
-            the password is medium
-          </div>
-          <div
-            className={
-              color === "gray"
-                ? "gray"
-                : color === "red"
-                ? "red"
-                : passwordStrength === "easy"
-                ? "gray"
-                : passwordStrength === "strong"
-                ? "green"
-                : passwordStrength === "medium"
-                ? "gray"
-                : color
-            }
-          >
-            the password is strong
-          </div>
-        </div>
-        <div>Password is: {passwordStrength}</div>
-        <div>Length is: {lengthField.length}</div>
+        <Sections color={color} passwordStrength={passwordStrength} />
+        <PasswordType passwordStrength={passwordStrength} />
+        <FieldLength lengthField={lengthField} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
